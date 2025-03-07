@@ -53,7 +53,7 @@ resource "aws_security_group" "new-terraform-sg" {
 
 resource "aws_instance" "terraform-ec2" {
   ami           = "ami-0cb91c7de36eed2cb"
-  key_name = "new-key"
+  key_name = "my-new-key"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.new-terraform-sg.id]
   tags= {

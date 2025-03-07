@@ -1,11 +1,21 @@
 - name: Install and Secure MySQL
-  hosts: web_server
+  hosts: web_servers
   become: yes
   vars:
     ansible_python_interpreter: /usr/bin/python3
     mysql_new_user: "teama_admin"
     mysql_new_password: "teama_password"
   tasks:
+    - name: Copying script over
+      copy:
+        src: useradd2.sh
+        dest: /tmp/useradd2.sh
+        mode: '0755'
+
+    - name: Executing Script to add users
+      command: /tmp/useradd2.sh
+      args:
+        chdir: /tmp
 
     - name: Update package cache (Debian-based)
       apt:
